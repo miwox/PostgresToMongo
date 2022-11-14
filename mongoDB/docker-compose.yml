@@ -18,13 +18,3 @@ services:
       - ./mongo-seed:/mongo-seed
     command:
       /mongo-seed/import.sh
-  
-
-  adminerMongo2:
-    container_name: adminerMongo
-    image: adminer  
-    restart: always
-    networks:
-      - "backend"
-    ports:
-      - 8080:8080
