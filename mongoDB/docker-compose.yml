@@ -1,0 +1,30 @@
+version: "3.9"
+
+networks:
+    backend:
+        external: true
+
+services:
+  mongodb:
+    image: mongo
+    ports: 
+    - 27017:27017
+  
+  mongo_seed:
+    image: mongo
+    links:
+      - mongodb
+    volumes:
+      - ./mongo-seed:/mongo-seed
+    command:
+      /mongo-seed/import.sh
+  
+
+  adminerMongo2:
+    container_name: adminerMongo
+    image: adminer  
+    restart: always
+    networks:
+      - "backend"
+    ports:
+      - 8080:8080
