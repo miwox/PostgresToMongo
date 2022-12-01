@@ -1,9 +1,5 @@
 version: "3.9"
 
-networks:
-    backend:
-        external: true
-
 services:
   postgres_db:
     container_name: postgresdb
@@ -16,8 +12,6 @@ services:
 
     ports:
       - "5432:5432"
-    networks:
-      - "backend"
 
   postgres_seed:
       container_name: postgresseed
@@ -30,8 +24,6 @@ services:
           - ./postgres/dvdrental.tar:/tmp/dvdrental.tar:ro
       entrypoint: [ "bash", "-c", "sleep 10 && pg_restore -h postgresdb -U postgres -d dvdrental /tmp/dvdrental.tar" ]
       restart: "no"
-      networks:
-        - "backend"
       depends_on:
         - "postgres_db"
 
@@ -39,18 +31,15 @@ services:
     container_name: postgres_json_extractor
     build: ./python/.
     image: postgres_json_extractor
+    privileged: true
     depends_on:
         postgres_seed:
             condition: service_completed_successfully
         postgres_db: 
             condition: service_started
-    networks:
-      - "backend"
 
   adminer:
     container_name: adminer
     image: adminer
-    networks:
-      - "backend"
     ports:
       - "${UI_PORT?}:8080"

@@ -11,7 +11,8 @@ conn = psycopg2.connect(
     user="postgres",
     password="1234")
 cursor = conn.cursor()
-
+print("Success full connected to PostgresDB")
+print("Start extracting tables to json files...")
 # %%
 #SQL to get all base tablenames, in dvdrental there are also views.
 sql =  "SELECT tablename from pg_catalog.pg_tables WHERE schemaname = 'public'"
@@ -30,3 +31,5 @@ for name in table_names:
     json_data = json.dumps(cursor.fetchone()[0], indent=2)
     with open(name + '.json', 'w') as fp:
         fp.write(json_data)
+
+print("Succesfully created .json files")
