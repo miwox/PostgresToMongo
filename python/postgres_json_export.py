@@ -1,6 +1,7 @@
 # y%%y
 import psycopg2
 import json
+import os
 
 # %%
 #verbindung zur query
@@ -11,7 +12,7 @@ conn = psycopg2.connect(
     user="postgres",
     password="1234")
 cursor = conn.cursor()
-print("Success full connected to PostgresDB")
+print("Successfull connected to PostgresDB")
 print("Start extracting tables to json files...")
 # %%
 #SQL to get all base tablenames, in dvdrental there are also views.
@@ -29,7 +30,6 @@ for name in table_names:
     cursor.execute(sql)
     # aggregate function return only one element, use fetchone and eliminate the pair
     json_data = json.dumps(cursor.fetchone()[0], indent=2)
-    with open(name + '.json', 'w') as fp:
+    with open(os.path.join(os.getcwd() + '/out/', name + '.json'), "w") as fp:
         fp.write(json_data)
-
 print("Succesfully created .json files")

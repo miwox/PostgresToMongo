@@ -31,12 +31,13 @@ services:
     container_name: postgres_json_extractor
     build: ./python/.
     image: postgres_json_extractor
-    privileged: true
     depends_on:
         postgres_seed:
             condition: service_completed_successfully
         postgres_db: 
             condition: service_started
+    volumes:
+    - ./out/:/src/out/
 
   adminer:
     container_name: adminer
