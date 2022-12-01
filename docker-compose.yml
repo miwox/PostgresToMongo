@@ -39,6 +39,36 @@ services:
     volumes:
     - ./out/:/src/out/
 
+
+  mongodb:
+    image: mongo
+    ports: 
+    - 27017:27017
+    
+    depends_on:
+      pythonExtractor:
+            condition: service_completed_successfully
+  
+  mongo_seed:
+    image: mongo
+    depends_on:
+      mongodb:
+            condition: service_started
+    links:
+      - mongodb
+    volumes:
+      - ./out/:/mongo-seed/
+      - ./mongo/import.sh:/mongo-seed/import.sh
+    command:
+      /mongo-seed/import.sh
+
+  mongo-handler:
+    container_name: mongo-handler
+    build: ./mongo-handler/.
+    depends_on:
+        mongo_seed:
+            condition: service_completed_successfully
+
   adminer:
     container_name: adminer
     image: adminer
