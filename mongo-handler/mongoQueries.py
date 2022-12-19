@@ -433,7 +433,7 @@ write_to_file("Collecting films with length < 60 minutes")
 film_ids_lt_60 = [k['film_id'] for k in mydatabase.film.find({'length': {'$lt': 60}})]
 inventory_ids_lt_60 = [k['inventory_id'] for k in mydatabase.inventory.find({'film_id':{'$in': film_ids_lt_60}})]    
 
-write_to_file("Film ids with length < 60 minutes :" + film_ids_lt_60)
+write_to_file("Film ids with length < 60 minutes :" + str(film_ids_lt_60))
 write_to_file("Deleting corresponding inventory objects...")
 deleted_result = mydatabase.inventory.delete_many({'film_id':{'$in': film_ids_lt_60}})
 write_to_file(f"Deleted {deleted_result.deleted_count} objects from inventory.")
