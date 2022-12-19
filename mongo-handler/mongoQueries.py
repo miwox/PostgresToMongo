@@ -215,7 +215,7 @@ query_f = [
     }
 ]
 QUERY_F = mydatabase.payment.aggregate(query_f)
-write_query_to_file("f. Die IDs der 10 Kunden mit den meisten Entleihungen", "mydatabase.payment.aggregate", query_f, QUERY_F)
+write_query_to_file("f.  Die Vor- und Nachnamen sowie die Niederlassung der 10 Kunden, die das meiste Geld ausgegeben haben", "mydatabase.payment.aggregate", query_f, QUERY_F)
 
 query_g = [
     {
@@ -367,7 +367,7 @@ CUSTOMER_LIST_PIPELINE = [
                  'if': '$activebool', 'then': 'active', 'else': ''
                   } 
                 },
-        'ssid':'$store_id'
+        'sid':'$store_id'
         }
     },
     {
