@@ -58,9 +58,9 @@ services:
       - mongodb
     volumes:
       - ./out/:/mongo-seed/
-      - ./mongo/import.sh:/mongo-seed/import.sh
+      - ./mongo/import.sh:/import.sh
     command:
-      /mongo-seed/import.sh
+      /import.sh
 
   mongo-handler:
     container_name: mongo-handler
