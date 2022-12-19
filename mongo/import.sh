@@ -29,7 +29,6 @@ do
     } 1>/dev/null 2>&1
     
     echo "${filename} Import successfull." | tee -a $log
-    echo "" | tee -a $log
     rm $f
     echo "${filename} binary file deleted successfully." | tee -a $log
     echo "" | tee -a $log

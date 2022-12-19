@@ -3,7 +3,14 @@ import psycopg2
 import json
 import os
 
+
+
 # %%
+    
+def write_to_file(text, file_name):
+    with open(os.path.join(os.getcwd() + '/out/', file_name), "a") as fp:
+        fp.write(text+ "\n")
+
 #verbindung zur query
 conn = psycopg2.connect(
     host="postgres_db",
@@ -11,6 +18,33 @@ conn = psycopg2.connect(
     database="dvdrental",
     user="postgres",
     password="1234")
+
+
+string ="  /XXXXXXXX                                           /XX                        "
+write_to_file(string, "logfile.txt")
+string =" | XX_____/                                          | XX                        "
+write_to_file(string, "logfile.txt")
+string =" | XX       /XX   /XX  /XXXXXX   /XXXXXX   /XXXXXX  /XXXXXX    /XXXXXX   /XXXXXX "
+write_to_file(string, "logfile.txt")
+string =" | XXXXX   |  XX /XX/ /XX__  XX /XX__  XX /XX__  XX|_  XX_/   /XX__  XX /XX__  XX"
+write_to_file(string, "logfile.txt")
+string =" | XX__/    \  XXXX/ | XX  \ XX| XX  \ XX| XX  \__/  | XX    | XXXXXXXX| XX  \__/"
+write_to_file(string, "logfile.txt")
+string =" | XX        >XX  XX | XX  | XX| XX  | XX| XX        | XX /XX| XX_____/| XX      "
+write_to_file(string, "logfile.txt")
+string =" | XXXXXXXX /XX/\  XX| XXXXXXX/|  XXXXXX/| XX        |  XXXX/|  XXXXXXX| XX      "
+write_to_file(string, "logfile.txt")
+string =" |________/|__/  \__/| XX____/  \______/ |__/         \___/   \_______/|__/      "
+write_to_file(string, "logfile.txt")
+string ="                     | XX                                                        "
+write_to_file(string, "logfile.txt")
+string ="                     | XX                                                        "
+write_to_file(string, "logfile.txt")
+string ="                     |__/                                                        "
+write_to_file(string, "logfile.txt")
+
+
+
 cursor = conn.cursor()
 print("Successfull connected to PostgresDB")
 print("Start extracting tables to json files...")
@@ -30,6 +64,9 @@ for name in table_names:
     cursor.execute(sql)
     # aggregate function return only one element, use fetchone and eliminate the pair
     json_data = json.dumps(cursor.fetchone()[0], indent=2)
-    with open(os.path.join(os.getcwd() + '/out/', name + '.json'), "w") as fp:
-        fp.write(json_data)
+    json_file_name = name + '.json'
+    write_to_file(json_data, json_file_name)
+    log_text = f"Extracting Select * From {name}; as json file."
+    write_to_file(log_text, "logfile.txt")
+
 print("Succesfully created .json files")
