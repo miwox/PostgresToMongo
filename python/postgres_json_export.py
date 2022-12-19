@@ -19,29 +19,17 @@ conn = psycopg2.connect(
     user="postgres",
     password="1234")
 
-
-string ="  /XXXXXXXX                                           /XX                        "
-write_to_file(string, "logfile.txt")
-string =" | XX_____/                                          | XX                        "
-write_to_file(string, "logfile.txt")
-string =" | XX       /XX   /XX  /XXXXXX   /XXXXXX   /XXXXXX  /XXXXXX    /XXXXXX   /XXXXXX "
-write_to_file(string, "logfile.txt")
-string =" | XXXXX   |  XX /XX/ /XX__  XX /XX__  XX /XX__  XX|_  XX_/   /XX__  XX /XX__  XX"
-write_to_file(string, "logfile.txt")
-string =" | XX__/    \  XXXX/ | XX  \ XX| XX  \ XX| XX  \__/  | XX    | XXXXXXXX| XX  \__/"
-write_to_file(string, "logfile.txt")
-string =" | XX        >XX  XX | XX  | XX| XX  | XX| XX        | XX /XX| XX_____/| XX      "
-write_to_file(string, "logfile.txt")
-string =" | XXXXXXXX /XX/\  XX| XXXXXXX/|  XXXXXX/| XX        |  XXXX/|  XXXXXXX| XX      "
-write_to_file(string, "logfile.txt")
-string =" |________/|__/  \__/| XX____/  \______/ |__/         \___/   \_______/|__/      "
-write_to_file(string, "logfile.txt")
-string ="                     | XX                                                        "
-write_to_file(string, "logfile.txt")
-string ="                     | XX                                                        "
-write_to_file(string, "logfile.txt")
-string ="                     |__/                                                        "
-write_to_file(string, "logfile.txt")
+write_to_file(" /XXXXXXXX                                           /XX                        ", "logfile.txt")
+write_to_file("| XX_____/                                          | XX                        ", "logfile.txt")
+write_to_file("| XX       /XX   /XX  /XXXXXX   /XXXXXX   /XXXXXX  /XXXXXX    /XXXXXX   /XXXXXX ", "logfile.txt")
+write_to_file("| XXXXX   |  XX /XX/ /XX__  XX /XX__  XX /XX__  XX|_  XX_/   /XX__  XX /XX__  XX", "logfile.txt")
+write_to_file("| XX__/    \  XXXX/ | XX  \ XX| XX  \ XX| XX  \__/  | XX    | XXXXXXXX| XX  \__/", "logfile.txt")
+write_to_file("| XX        >XX  XX | XX  | XX| XX  | XX| XX        | XX /XX| XX_____/| XX      ", "logfile.txt")
+write_to_file("| XXXXXXXX /XX/\  XX| XXXXXXX/|  XXXXXX/| XX        |  XXXX/|  XXXXXXX| XX      ", "logfile.txt")
+write_to_file("|________/|__/  \__/| XX____/  \______/ |__/         \___/   \_______/|__/      ", "logfile.txt")
+write_to_file("                    | XX                                                        ", "logfile.txt")
+write_to_file("                    | XX                                                        ", "logfile.txt")
+write_to_file("                    |__/                                                        ", "logfile.txt")
 
 
 

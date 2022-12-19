@@ -65,6 +65,8 @@ services:
   mongo-handler:
     container_name: mongo-handler
     build: ./mongo-handler/.
+    volumes:
+    - ./out/:/src/out/
     depends_on:
         mongo_seed:
             condition: service_completed_successfully
