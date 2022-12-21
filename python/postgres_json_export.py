@@ -1,23 +1,14 @@
-# y%%y
 import psycopg2
 import json
 import os
 
-
-
-# %%
-    
+"""
+Appends a given String to a given filename.
+"""
 def write_to_file(text, file_name):
     with open(os.path.join(os.getcwd() + '/out/', file_name), "a") as fp:
         fp.write(text+ "\n")
 
-#verbindung zur query
-conn = psycopg2.connect(
-    host="postgres_db",
-    port=5432,
-    database="dvdrental",
-    user="postgres",
-    password="1234")
 
 write_to_file(" /XXXXXXXX                                           /XX                        ", "logfile.txt")
 write_to_file("| XX_____/                                          | XX                        ", "logfile.txt")
@@ -31,26 +22,29 @@ write_to_file("                    | XX                                         
 write_to_file("                    | XX                                                        ", "logfile.txt")
 write_to_file("                    |__/                                                        ", "logfile.txt")
 
-
-
+#Connectiong to Postgres_DB and getting a cursor to run queries.
+conn = psycopg2.connect(
+    host="postgres_db",
+    port=5432,
+    database="dvdrental",
+    user="postgres",
+    password="1234")
 cursor = conn.cursor()
 print("Successfull connected to PostgresDB")
 print("Start extracting tables to json files...")
-# %%
-#SQL to get all base tablenames, in dvdrental there are also views.
+
+#Executing an SQL query to collect all tablenames. Views will not be consideres by the query.
 sql =  "SELECT tablename from pg_catalog.pg_tables WHERE schemaname = 'public'"
 cursor.execute(sql)
-
-# %%
 table_names = []
 for pair in cursor:
     table_names.append(pair[0])
 
-# %%
+#Iterating over the tablenames to export each table as a .json file /out directory.
 for name in table_names:
     sql = f"Select array_to_json(array_agg(x)) From(Select * FROM {name})x"
     cursor.execute(sql)
-    # aggregate function return only one element, use fetchone and eliminate the pair
+    #array_agg() returns an array with a single element. Using fetchone and eliminate the element pair.
     json_data = json.dumps(cursor.fetchone()[0], indent=2)
     json_file_name = name + '.json'
     write_to_file(json_data, json_file_name)

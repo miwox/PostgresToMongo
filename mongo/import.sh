@@ -19,6 +19,8 @@ echo "                      | xx                                                
 echo "                      |__/                                                        " | tee -a $log
 
 echo "Trying to import to MongoDB..." | tee -a $log
+
+#Iterating through the .json files in /out directory (monuted as /mongo-seed inside the docker container) and importing them to mongoDB.
 for f in $FILES
 do
     filename=${f#"$prefix"}
