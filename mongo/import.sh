@@ -1,5 +1,5 @@
 #! /bin/bash
-
+#Import script for the binary .json files to the mongo db container
 FILES="/mongo-seed/*.json"
 prefix="/mongo-seed/"
 suffix=".json"

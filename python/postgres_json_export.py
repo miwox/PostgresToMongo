@@ -1,3 +1,6 @@
+"""
+Python script for to extract the tables into binary .json files.
+"""
 import psycopg2
 import json
 import os

@@ -1,3 +1,4 @@
+#Dockerfle for the mongoqueries container
 FROM python:latest
 WORKDIR /src
 ADD requirements.txt requirements.txt

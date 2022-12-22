@@ -1,3 +1,6 @@
+"""
+Python script for the mongo queries, creating the view and update delete.
+"""
 from pymongo import MongoClient
 import hashlib
 import os
@@ -447,6 +450,11 @@ write_query_to_file("Updated inventory", "mydatabase.inventory.aggregate", query
 #Deleting all films with a length less than 60 minutes.
 write_to_file("Collecting films with length < 60 minutes")
 film_ids_lt_60 = [k['film_id'] for k in mydatabase.film.find({'length': {'$lt': 60}})]
+
+# We don't delete the films from the film collection, maybe in the future the boss is telling to us to buy this films again.
+# Then I don't to put them again into the collection. If you like do it anyway.. uncomment the next line.
+#mydatabase.film.delete_many({'film_id':{'$in': film_ids_lt_60}})
+
 inventory_ids_lt_60 = [k['inventory_id'] for k in mydatabase.inventory.find({'film_id':{'$in': film_ids_lt_60}})]    
 write_to_file("Film ids with length < 60 minutes :" + str(film_ids_lt_60))
 write_to_file("Deleting corresponding inventory objects...")
