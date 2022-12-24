@@ -8,7 +8,9 @@ Wir haben alles gemeinsam im Pair-Programming gelöst.
 
 Wir sind Gruppe a) mit Marvin Schwering 103872 und Miwand Baraksaie 104162
 
-Manchmal buggt das postgress-seed, dann einfach `docker-compose down` und anschließend ein `docker-compose up -d --build`. Der Grund hierfür ist, wenn z. B. die Container nicht ordnungsmäß mit einem `docker-compose down`heruntergefahren werden. 
+Manchmal buggt der postgress-seed, dann einfach `docker-compose down` und anschließend ein `docker-compose up -d --build`. Der Grund hierfür ist, wenn z. B. die Container nicht ordnungsmäß mit einem `docker-compose down`heruntergefahren werden.
+
+Beim Ausführen kann es durch Windows-Zeilenumbrüche zu Problemen des mongo-seed durch die `import.sh` kommen. Zur Behebung müssen die Windows-Style Zeilenumbrüche zu Unix-Style gewandelt werden. Dafür kann der Befehl `sed -i -e 's/\r$//' mongo/import.sh` verwendet werden.
 
 Noch eine Anmerkung zum Löschen der Filme mit einer Länge < 60.
 Wir löschen diese Filme nur aus dem Inventar und natürlich aus der Rental-Collection, wie gefordert.

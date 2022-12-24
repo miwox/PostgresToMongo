@@ -405,7 +405,7 @@ write_query_to_file("Customer_List View erzeugen", "mydatabase.create_collection
 write_to_file("Changing passwords ....")
 for record in mydatabase.staff.find():
     mydatabase.staff.update_one({'_id': record['_id']}, {'$set': {'password': randomPassword()}})
-    write_to_file(f"Password of {record['staff_id']} changed.")
+    write_to_file(f"Password of Staff member with Staff_ID {record['staff_id']} changed.")
 write_to_file("All passwords changed")
 write_to_file("-------------------------------------------------------------------------------------------------")
 
